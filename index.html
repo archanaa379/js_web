@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Closet Clash — A vs B, two looks, one winner!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="app-title">Closet Clash</h1>
+      <p class="tagline">A vs B, two looks, one winner!</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="clash-grid" aria-label="Vote between two fashion looks">
+      <article class="look-card" id="cardA" aria-labelledby="titleA">
+        <div class="media-wrapper">
+          <img src="https://images.unsplash.com/photo-1516594915697-87eb3b1c1b48?q=80&w=1600&auto=format&fit=crop" alt="Look A — streetwear jacket and sneakers" class="look-image">
+        </div>
+        <div class="look-content">
+          <h2 id="titleA" class="look-title">Look A — Urban Streetwear</h2>
+          <p class="look-desc">Cropped puffer, graphic tee, relaxed denim, and chunky sneakers.</p>
+          <div class="stats" aria-live="polite">
+            <span class="stat"><strong id="countA">0</strong> votes</span>
+            <span class="dot">•</span>
+            <span class="stat"><strong id="percentA">0%</strong></span>
+          </div>
+          <button id="voteA" class="btn primary">Vote Look A</button>
+        </div>
+      </article>
+
+      <article class="look-card" id="cardB" aria-labelledby="titleB">
+        <div class="media-wrapper">
+          <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1600&auto=format&fit=crop" alt="Look B — minimalist blazer and loafers" class="look-image">
+        </div>
+        <div class="look-content">
+          <h2 id="titleB" class="look-title">Look B — Minimalist Classic</h2>
+          <p class="look-desc">Tailored blazer, crisp shirt, high-waist trousers, and sleek loafers.</p>
+          <div class="stats" aria-live="polite">
+            <span class="stat"><strong id="countB">0</strong> votes</span>
+            <span class="dot">•</span>
+            <span class="stat"><strong id="percentB">0%</strong></span>
+          </div>
+          <button id="voteB" class="btn primary">Vote Look B</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="summary">
+      <div class="summary-card">
+        <div class="totals">
+          <span>Total votes:</span>
+          <strong id="totalVotes">0</strong>
+        </div>
+        <div id="leaderText" class="leader" aria-live="polite"></div>
+        <button id="resetBtn" class="btn ghost" type="button">Reset votes</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>Made with ♥ for friendly fashion face-offs.</small>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
