@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Activity x:Class="LoginToSpotify" mc:Ignorable="sap sap2010" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation">
+  <x:Members>
+    <x:Property Name="Username" Type="InArgument(x:String)" />
+    <x:Property Name="Password" Type="InArgument(x:String)" />
+    <x:Property Name="LoginSucceeded" Type="OutArgument(x:Boolean)" />
+  </x:Members>
+  <Sequence DisplayName="LoginToSpotify">
+    <WriteLine Text="[\"TODO: Open Browser (Chrome) to https://open.spotify.com\"]" />
+    <WriteLine Text="[\"TODO: Click Log in, Type Into username and password fields, then Click login\"]" />
+    <WriteLine Text="[\"TODO: Wrap steps in Try/Catch; on failure show Message Box: 'Login failed. Please check your credentials.' and set LoginSucceeded=False\"]" />
+    <WriteLine Text="[\"TODO: On success set LoginSucceeded=True and Delay 00:00:03\"]" />
+  </Sequence>
+</Activity>
