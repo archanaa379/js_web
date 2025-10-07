@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Activity x:Class="GetUserMood" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" mva:VisualBasic.Settings="{}" sap2010:WorkflowViewState.IdRef="GetUserMood_1">
+  <x:Members>
+    <x:Property Name="out_SelectedMood" Type="OutArgument(x:String)" />
+    <x:Property Name="out_PlaylistName" Type="OutArgument(x:String)" />
+  </x:Members>
+  <Sequence DisplayName="Get User Mood and Map Playlist" sap2010:WorkflowViewState.IdRef="Sequence_GetUserMood">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="selectedMood" />
+      <Variable x:TypeArguments="x:String" Name="playlistName" />
+    </Sequence.Variables>
+    <ui:Comment Text="Ask the user to choose a mood" DisplayName="Comment - Prompt for Mood" />
+    <ui:InputDialog DisplayName="Select Mood" Title="Mood Selection" Label="What’s your current mood?" Result="[selectedMood]">
+      <ui:InputDialog.Options>
+        <scg:List x:TypeArguments="x:String">
+          <x:String>Happy</x:String>
+          <x:String>Sad</x:String>
+          <x:String>Romantic</x:String>
+          <x:String>Chill</x:String>
+          <x:String>Energetic</x:String>
+          <x:String>Focus</x:String>
+        </scg:List>
+      </ui:InputDialog.Options>
+    </ui:InputDialog>
+    <Delay DisplayName="Delay 3s" Duration="00:00:03" />
+    <ui:Comment Text="Map mood to a Spotify playlist name" DisplayName="Comment - Map Mood" />
+    <Switch x:TypeArguments="x:String" DisplayName="Map Mood to Playlist" Expression="[selectedMood]" sap2010:WorkflowViewState.IdRef="Switch_MapMood">
+      <Sequence x:Key="Happy" DisplayName="Happy → Feel Good Hits">
+        <Assign DisplayName="Set Playlist for Happy">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[playlistName]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">"Feel Good Hits"</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+      <Sequence x:Key="Sad" DisplayName="Sad → Sad Songs">
+        <Assign DisplayName="Set Playlist for Sad">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[playlistName]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">"Sad Songs"</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+      <Sequence x:Key="Romantic" DisplayName="Romantic → Love Songs">
+        <Assign DisplayName="Set Playlist for Romantic">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[playlistName]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">"Love Songs"</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+      <Sequence x:Key="Chill" DisplayName="Chill → Lo-Fi Beats">
+        <Assign DisplayName="Set Playlist for Chill">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[playlistName]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">"Lo-Fi Beats"</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+      <Sequence x:Key="Energetic" DisplayName="Energetic → Workout Mix">
+        <Assign DisplayName="Set Playlist for Energetic">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[playlistName]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">"Workout Mix"</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+      <Sequence x:Key="Focus" DisplayName="Focus → Deep Focus">
+        <Assign DisplayName="Set Playlist for Focus">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[playlistName]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">"Deep Focus"</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+      <Switch.Default>
+        <Assign DisplayName="Default Playlist (Lo-Fi Beats)">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[playlistName]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">"Lo-Fi Beats"</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Switch.Default>
+    </Switch>
+    <ui:Comment Text="Return outputs to calling workflow" DisplayName="Comment - Set Out Args" />
+    <Assign DisplayName="Set out_SelectedMood">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_SelectedMood]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[selectedMood]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Set out_PlaylistName">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_PlaylistName]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[playlistName]</InArgument>
+      </Assign.Value>
+    </Assign>
+  </Sequence>
+</Activity>

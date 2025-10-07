@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Activity x:Class="SearchAndPlayPlaylist" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mva="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:ui="http://schemas.uipath.com/workflow/activities" mva:VisualBasic.Settings="{}" sap2010:WorkflowViewState.IdRef="SearchAndPlayPlaylist_1">
+  <x:Members>
+    <x:Property Name="in_PlaylistName" Type="InArgument(x:String)" />
+  </x:Members>
+  <Sequence DisplayName="Search and Play Playlist" sap2010:WorkflowViewState.IdRef="Sequence_SearchPlay">
+    <ui:Comment Text="Search for playlist and press Play" DisplayName="Comment - Search & Play" />
+    <Delay DisplayName="Delay 3s" Duration="00:00:03" />
+    <ui:Comment Text="Focus on Spotify search input" DisplayName="Comment - Focus Search" />
+    <ui:Click DisplayName="Click - Search Field">
+      <ui:Click.Target>
+        <ui:Target Selector="&lt;html app='chrome.exe' title='*Spotify*' /&gt;&lt;webctrl tag='INPUT' aria-label='Search' /&gt;" />
+      </ui:Click.Target>
+    </ui:Click>
+    <Delay DisplayName="Delay 3s" Duration="00:00:03" />
+    <ui:TypeInto DisplayName="Type Into - Search" ClickBeforeTyping="True" EmptyField="True" Text="[in_PlaylistName + Environment.NewLine]">
+      <ui:TypeInto.Target>
+        <ui:Target Selector="&lt;html app='chrome.exe' title='*Spotify*' /&gt;&lt;webctrl tag='INPUT' aria-label='Search' /&gt;" />
+      </ui:TypeInto.Target>
+    </ui:TypeInto>
+    <Delay DisplayName="Delay 5s" Duration="00:00:05" />
+    <ui:Comment Text="Click first playlist result" DisplayName="Comment - Open Playlist" />
+    <ui:Click DisplayName="Click - First Playlist Result">
+      <ui:Click.Target>
+        <ui:Target Selector="&lt;html app='chrome.exe' title='*Spotify*' /&gt;&lt;webctrl role='link' idx='1' /&gt;" />
+      </ui:Click.Target>
+    </ui:Click>
+    <Delay DisplayName="Delay 3s" Duration="00:00:03" />
+    <ui:Comment Text="Click Play on playlist page" DisplayName="Comment - Click Play" />
+    <ui:Click DisplayName="Click - Play Button">
+      <ui:Click.Target>
+        <ui:Target Selector="&lt;html app='chrome.exe' title='*Spotify*' /&gt;&lt;webctrl tag='BUTTON' aria-label='Play' /&gt;" />
+      </ui:Click.Target>
+    </ui:Click>
+    <Delay DisplayName="Delay 3s" Duration="00:00:03" />
+  </Sequence>
+</Activity>
