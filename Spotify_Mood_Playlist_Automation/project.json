@@ -1,0 +1,29 @@
+{
+  "name": "Spotify_Mood_Playlist_Automation",
+  "description": "Automates Spotify Web to play mood-based playlists based on user selection.",
+  "main": "Main.xaml",
+  "dependencies": {
+    "UiPath.System.Activities": "[23.10.8]",
+    "UiPath.UIAutomation.Activities": "[23.10.12]",
+    "UiPath.Excel.Activities": "[2.22.3]"
+  },
+  "schemaVersion": "4.0",
+  "studioVersion": "23.10.8.0",
+  "projectVersion": "1.0.0",
+  "runtimeOptions": {
+    "autoDispose": false,
+    "isPipPackage": false,
+    "windowsWorkflowFoundation": false
+  },
+  "designOptions": {
+    "fileAnnotations": [],
+    "releaseNotes": "Initial version"
+  },
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "Main_1"
+    }
+  ],
+  "orchestratorSettings": {}
+}

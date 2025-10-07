@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Activity x:Class="ErrorHandler" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:ui="http://schemas.uipath.com/workflow/activities" mva:VisualBasic.Settings="{}" sap2010:WorkflowViewState.IdRef="ErrorHandler_1">
+  <x:Members>
+    <x:Property Name="in_Message" Type="InArgument(x:String)" />
+  </x:Members>
+  <Sequence DisplayName="Error Handler" sap2010:WorkflowViewState.IdRef="Sequence_ErrorHandler">
+    <ui:Comment Text="Show a user-friendly error message" DisplayName="Comment - Error Message" />
+    <ui:MessageBox DisplayName="Message Box - Error" Caption="Spotify Automation" Text="[in_Message]" />
+  </Sequence>
+</Activity>

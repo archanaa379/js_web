@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Activity x:Class="Main" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:ui="http://schemas.uipath.com/workflow/activities" mva:VisualBasic.Settings="{}" sap2010:WorkflowViewState.IdRef="Main_1">
+  <Sequence DisplayName="Main" sap2010:WorkflowViewState.IdRef="Sequence_Main">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="selectedMood" />
+      <Variable x:TypeArguments="x:String" Name="playlistName" />
+      <Variable x:TypeArguments="x:String" Name="username" Default="YourUsernameHere" />
+      <Variable x:TypeArguments="x:String" Name="password" Default="YourPasswordHere" />
+    </Sequence.Variables>
+    <ui:Comment Text="Get user mood and mapped playlist" DisplayName="Comment - Get Mood" />
+    <InvokeWorkflowFile DisplayName="Invoke - GetUserMood.xaml" WorkflowFileName="GetUserMood.xaml">
+      <InvokeWorkflowFile.Arguments>
+        <InOutArgument x:TypeArguments="x:String" x:Key="out_SelectedMood">[selectedMood]</InOutArgument>
+        <InOutArgument x:TypeArguments="x:String" x:Key="out_PlaylistName">[playlistName]</InOutArgument>
+      </InvokeWorkflowFile.Arguments>
+    </InvokeWorkflowFile>
+    <Delay DisplayName="Delay 3s" Duration="00:00:03" />
+    <TryCatch DisplayName="Try Catch - Login">
+      <TryCatch.Try>
+        <Sequence DisplayName="Try - Login">
+          <InvokeWorkflowFile DisplayName="Invoke - LoginToSpotify.xaml" WorkflowFileName="LoginToSpotify.xaml">
+            <InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Username">[username]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Password">[password]</InArgument>
+            </InvokeWorkflowFile.Arguments>
+          </InvokeWorkflowFile>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="x:Exception" DisplayName="Catch - Any Exception">
+          <ActivityAction x:TypeArguments="x:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="x:Exception" Name="ex" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Handle Login Failure">
+              <InvokeWorkflowFile DisplayName="Invoke - ErrorHandler.xaml" WorkflowFileName="ErrorHandler.xaml">
+                <InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_Message">"Login failed. Please check your credentials."</InArgument>
+                </InvokeWorkflowFile.Arguments>
+              </InvokeWorkflowFile>
+              <Throw DisplayName="Rethrow Exception" Exception="[ex]" />
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <Delay DisplayName="Delay 3s" Duration="00:00:03" />
+    <ui:Comment Text="Search for playlist and play" DisplayName="Comment - Search & Play" />
+    <InvokeWorkflowFile DisplayName="Invoke - SearchAndPlayPlaylist.xaml" WorkflowFileName="SearchAndPlayPlaylist.xaml">
+      <InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_PlaylistName">[playlistName]</InArgument>
+      </InvokeWorkflowFile.Arguments>
+    </InvokeWorkflowFile>
+    <Delay DisplayName="Delay 3s" Duration="00:00:03" />
+    <ui:Comment Text="Inform user that playlist is playing" DisplayName="Comment - Success Message" />
+    <ui:MessageBox DisplayName="Message Box - Now Playing" Caption="Spotify Automation" Text="[\"Now playing your \" + selectedMood + \" mood playlist: \" + playlistName]" />
+  </Sequence>
+</Activity>

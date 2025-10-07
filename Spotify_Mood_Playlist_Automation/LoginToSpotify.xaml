@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Activity x:Class="LoginToSpotify" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:s="clr-namespace:System;assembly=mscorlib" mva:VisualBasic.Settings="{}" sap2010:WorkflowViewState.IdRef="LoginToSpotify_1">
+  <x:Members>
+    <x:Property Name="in_Username" Type="InArgument(x:String)" />
+    <x:Property Name="in_Password" Type="InArgument(x:String)" />
+  </x:Members>
+  <Sequence DisplayName="Login To Spotify (Open Browser + Login)" sap2010:WorkflowViewState.IdRef="Sequence_LoginSpotify">
+    <ui:Comment Text="Open Spotify Web in Google Chrome" DisplayName="Comment - Open Browser" />
+    <ui:OpenBrowser DisplayName="Open Browser - Spotify" BrowserType="Chrome" Url="https://open.spotify.com/" Private="False" NewSession="True">
+      <ui:OpenBrowser.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="ctx" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Browser Actions - Login" sap2010:WorkflowViewState.IdRef="Sequence_BrowserActions">
+            <Delay DisplayName="Delay 3s" Duration="00:00:03" />
+            <ui:Comment Text="Click the Log in link/button" DisplayName="Comment - Click Login" />
+            <ui:Click DisplayName="Click - Log in">
+              <ui:Click.Target>
+                <ui:Target Selector="&lt;html app='chrome.exe' title='*Spotify*' /&gt;&lt;webctrl tag='A' aaname='Log in' /&gt;" />
+              </ui:Click.Target>
+            </ui:Click>
+            <Delay DisplayName="Delay 3s" Duration="00:00:03" />
+            <ui:Comment Text="Type Username" DisplayName="Comment - Type Username" />
+            <ui:TypeInto DisplayName="Type Into - Username" ClickBeforeTyping="True" EmptyField="True" Text="[in_Username]">
+              <ui:TypeInto.Target>
+                <ui:Target Selector="&lt;html app='chrome.exe' title='*Log in*' /&gt;&lt;webctrl id='login-username' tag='INPUT' /&gt;" />
+              </ui:TypeInto.Target>
+            </ui:TypeInto>
+            <Delay DisplayName="Delay 3s" Duration="00:00:03" />
+            <ui:Comment Text="Type Password" DisplayName="Comment - Type Password" />
+            <ui:TypeInto DisplayName="Type Into - Password" ClickBeforeTyping="True" EmptyField="True" Text="[in_Password]" IsPassword="True">
+              <ui:TypeInto.Target>
+                <ui:Target Selector="&lt;html app='chrome.exe' title='*Log in*' /&gt;&lt;webctrl id='login-password' tag='INPUT' /&gt;" />
+              </ui:TypeInto.Target>
+            </ui:TypeInto>
+            <Delay DisplayName="Delay 3s" Duration="00:00:03" />
+            <ui:Comment Text="Click the Log In button" DisplayName="Comment - Click Log In Button" />
+            <ui:Click DisplayName="Click - Log In Button">
+              <ui:Click.Target>
+                <ui:Target Selector="&lt;html app='chrome.exe' title='*Log in*' /&gt;&lt;webctrl tag='BUTTON' aaname='Log In' /&gt;" />
+              </ui:Click.Target>
+            </ui:Click>
+            <Delay DisplayName="Delay 5s" Duration="00:00:05" />
+          </Sequence>
+        </ActivityAction>
+      </ui:OpenBrowser.Body>
+    </ui:OpenBrowser>
+  </Sequence>
+</Activity>
