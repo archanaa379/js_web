@@ -1,0 +1,37 @@
+{
+  "name": "Spotify_Mood_Playlist_Automation",
+  "description": "Asks for mood, logs in to Spotify Web, searches mapped playlist, and plays it.",
+  "main": "Main.xaml",
+  "projectVersion": "1.0.0",
+  "schemaVersion": "4.0",
+  "studioVersion": "24.10.0.0",
+  "projectType": "Process",
+  "designOptions": {
+    "projectProfile": "Modern",
+    "expressionsLanguage": "VisualBasic",
+    "fileAccessMode": "Explicit"
+  },
+  "runtimeOptions": {
+    "autoDispose": true,
+    "isPausable": true,
+    "requiresUserInteraction": true,
+    "supportsMultipleEntryPoints": false
+  },
+  "libraryOptions": {
+    "includeSource": true,
+    "excludePrivate": false
+  },
+  "dependencies": {
+    "UiPath.System.Activities": "[24.10.1]",
+    "UiPath.UiAutomation.Activities": "[24.10.2]",
+    "UiPath.Excel.Activities": "[24.10.0]",
+    "UiPath.Form.Activities": "[1.10.5]"
+  },
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "Main_xaml"
+    }
+  ],
+  "webServices": []
+}

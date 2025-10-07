@@ -1,0 +1,35 @@
+{
+  "name": "SpotifyAutomation",
+  "description": "Automates Spotify: open browser, log in, search, and play a song.",
+  "main": "Main.xaml",
+  "projectVersion": "1.0.0",
+  "schemaVersion": "4.0",
+  "studioVersion": "24.10.0.0",
+  "projectType": "Process",
+  "designOptions": {
+    "projectProfile": "Modern",
+    "expressionsLanguage": "VisualBasic",
+    "fileAccessMode": "Explicit"
+  },
+  "runtimeOptions": {
+    "autoDispose": true,
+    "isPausable": true,
+    "requiresUserInteraction": true,
+    "supportsMultipleEntryPoints": false
+  },
+  "libraryOptions": {
+    "includeSource": true,
+    "excludePrivate": false
+  },
+  "dependencies": {
+    "UiPath.System.Activities": "[24.10.1]",
+    "UiPath.UiAutomation.Activities": "[24.10.2]"
+  },
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "Main_xaml"
+    }
+  ],
+  "webServices": []
+}
