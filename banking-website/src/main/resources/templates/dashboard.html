@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bank - Dashboard</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <form method="post" action="/logout" style="float:right">
+      <button type="submit">Logout</button>
+    </form>
+    <h1 th:text="'Welcome, ' + ${user.fullName}">Welcome</h1>
+
+    <div th:each="acct : ${accounts}" class="card">
+      <h2>Account <span th:text="${acct.accountNumber}">ACC</span></h2>
+      <p>Balance: <strong th:text="${#numbers.formatDecimal(acct.balance, 1, 'COMMA', 2, 'POINT')}">0.00</strong></p>
+
+      <h3>Deposit</h3>
+      <form method="post" action="/deposit">
+        <input type="hidden" name="accountId" th:value="${acct.id}" />
+        <input type="number" name="amount" step="0.01" min="0.01" placeholder="Amount" required />
+        <input type="text" name="description" placeholder="Description (optional)" />
+        <button type="submit">Deposit</button>
+      </form>
+
+      <h3>Withdraw</h3>
+      <form method="post" action="/withdraw">
+        <input type="hidden" name="accountId" th:value="${acct.id}" />
+        <input type="number" name="amount" step="0.01" min="0.01" placeholder="Amount" required />
+        <input type="text" name="description" placeholder="Description (optional)" />
+        <button type="submit">Withdraw</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

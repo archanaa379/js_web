@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bank - Login</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Login</h1>
+    <form method="post" action="/login">
+      <label>Email</label>
+      <input type="email" name="email" required />
+      <label>Password</label>
+      <input type="password" name="password" required />
+      <button type="submit">Login</button>
+    </form>
+    <p th:if="${error}" th:text="${error}" style="color:red"></p>
+    <p>No account? <a href="/register">Register</a></p>
+  </div>
+</body>
+</html>
